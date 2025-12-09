@@ -1,4 +1,4 @@
-use std::{fs::read_to_string};
+use std::{fs::read_to_string, process::exit};
 
 /// https://adventofcode.com/2025/day/1
 
@@ -12,26 +12,30 @@ fn main() {
     let inputs: Vec<&str> = inputfile.lines().collect();
 
     // dial starts at 50
-    let mut dial: i32 = 50;
+    let mut dial: f32 = 50.0;
     
     // password is number of times the dial is at zero
-    let mut pwd: i32 = 0;
+    let mut pwd: f32 = 0.0;
 
     for input in inputs{
-        let turn = match input.get(0..1) {
-            Some("R") => input.get(1..).unwrap().parse::<i32>().unwrap(),
-            Some("L") => input.get(1..).unwrap().parse::<i32>().unwrap() * -1,
-            _ => 0
+        // number of clicks
+        let clicks: f32 = input.get(1..).unwrap().parse::<f32>().unwrap();
+
+        // direction of rotation (1 is right, -1 is left)
+        let direction: f32 = match input.get(0..1){
+            Some("R") => 1.0,
+            Some("L") => -1.0,
+            _ => 0.0
         };
 
-        dial += turn;
-        // the dial has numbers 0 to 99, so if the current dial number is divisible
-        // by 100, the dial is at zero. this way we dont need to simulate an actual dial and
-        // worry about our `dial` number being negative.
-        if dial % 100 == 0 {
-            pwd += 1;
+        // target after this rotation
+        let next: f32 = dial + ( clicks * direction );
+
+        // rotating the dial and checking every click (not optimal)
+        while dial != next{
+            dial += direction;
+            if dial % 100.0 == 0.0 { pwd += 1.0; }
         }
     }
-
-    print!("the password is {}", pwd);
+    print!("\nthe password is {}", pwd);
 }
