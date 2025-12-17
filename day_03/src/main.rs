@@ -1,10 +1,11 @@
+#![warn(clippy::all, clippy::nursery)]
+
 use std::{
     fs::File,
     io::{BufRead, BufReader},
 };
 
 /// https://adventofcode.com/2025/day/3
-
 fn main() {
     // read input file into a Vec<Vec<u32>>
     let f = File::open("./src/input.txt").expect("error opening input file");

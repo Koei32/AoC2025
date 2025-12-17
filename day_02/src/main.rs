@@ -1,10 +1,11 @@
+#![warn(clippy::all, clippy::nursery)]
+
 use std::{
     fs::File,
     io::{BufReader, Read},
 };
 
 /// https://adventofcode.com/2025/day/2
-
 fn main() {
     // reads input file into a string
     let f = File::open("./src/input.txt").expect("error opening input file");
@@ -33,13 +34,13 @@ fn main() {
         let mut id: String;
         // iterating over the range
         for i in input.0..input.1 + 1 {
-            id = String::from(i.to_string()); // this line may hurt performance, im not sure
+            id = i.to_string(); // this line may hurt performance, im not sure
             let id_len: usize = id.len();
 
             // splitting the id in parts of size `substr_len`
             for substr_len in 1..(id_len / 2) + 1 {
                 // if the id cannot be split cleanly, we advance to next substr_len
-                if id_len as usize % substr_len != 0 {
+                if !(id_len).is_multiple_of(substr_len) {
                     continue;
                 }
 
@@ -47,7 +48,7 @@ fn main() {
                 let mut splits: Vec<&str> = Vec::new();
 
                 // building the `splits` vec
-                for split_pos in (0..id_len).into_iter().step_by(substr_len) {
+                for split_pos in (0..id_len).step_by(substr_len) {
                     splits.push(&id[split_pos..split_pos + substr_len]);
                 }
 

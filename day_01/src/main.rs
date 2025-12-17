@@ -1,10 +1,11 @@
+#![warn(clippy::all, clippy::nursery)]
+
 use std::{
     fs::File,
     io::{BufRead, BufReader},
 };
 
 /// https://adventofcode.com/2025/day/1
-
 fn main() {
     // reads input file into a buffer
     let f = File::open("./src/input.txt").expect("error opening input file");
@@ -17,7 +18,7 @@ fn main() {
     let mut dial: f32 = 50.0;
 
     // password is number of times the dial is at zero
-    let mut pwd: f32 = 0.0;
+    let mut pwd: i32 = 0;
 
     for input in inputs {
         // number of clicks
@@ -31,13 +32,13 @@ fn main() {
         };
 
         // target after this rotation
-        let next: f32 = dial + (clicks * direction);
+        let next: f32 = clicks.mul_add(direction, dial);
 
         // rotating the dial and checking every click (may not be the most optimal technique)
-        while dial != next {
+        while dial as i32 != next as i32 {
             dial += direction;
             if dial % 100.0 == 0.0 {
-                pwd += 1.0;
+                pwd += 1;
             }
         }
     }

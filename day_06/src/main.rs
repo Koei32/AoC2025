@@ -14,8 +14,7 @@ fn main() {
     let operators: Vec<&str> = binding.split_whitespace().collect();
 
     // solution for part 1
-    /*
-    let numbers: Vec<Vec<u64>> = input
+    /*let numbers: Vec<Vec<u64>> = input
         .iter()
         .map(|x| x.split_whitespace().map(|x| x.parse().unwrap()).collect())
         .collect();
@@ -26,13 +25,14 @@ fn main() {
         let mut result = 0;
         for j in &numbers {
             match operators[i] {
-                "+" => result = result + j[i],
+                "+" => result += j[i],
                 "*" => result = if result == 0 { j[i] } else { j[i] * result },
                 _ => (),
             };
         }
         grand_total += result;
-    } */
+    }
+    println!("the grand total is {}", grand_total);*/
 
     // solution for part 2
 

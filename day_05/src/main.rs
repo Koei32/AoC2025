@@ -1,3 +1,5 @@
+#![warn(clippy::all, clippy::nursery)]
+
 use std::{
     cmp::{max, min},
     collections::HashSet,
@@ -6,7 +8,6 @@ use std::{
 };
 
 /// https://adventofcode.com/2025/day/5
-
 fn main() {
     let f = File::open("./src/input.txt").expect("error opening input file");
     let mut reader = BufReader::new(f);
@@ -18,8 +19,7 @@ fn main() {
     // split the input into ranges and available ids
     let split: Vec<Vec<&str>> = input
         .split("\r\n\r\n")
-        .into_iter()
-        .map(|x| x.split_whitespace().into_iter().collect())
+        .map(|x| x.split_whitespace().collect())
         .collect();
 
     let mut id_ranges: Vec<(i64, i64)> = split[0]
