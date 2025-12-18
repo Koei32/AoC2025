@@ -14,5 +14,4 @@ target
 **/mutants.out*/
 
 # Files containing Advent of Code puzzle inputs and examples
-**/src/example.txt
-**/src/input.txt
+**/src/*.txt

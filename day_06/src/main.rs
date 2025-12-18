@@ -3,6 +3,7 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
+/// https://adventofcode.com/2025/day/6
 fn main() {
     // read the file lines into a vec
     let f = File::open("./src/input.txt").expect("error opening input file");
